@@ -1,19 +1,25 @@
-﻿using System;
+﻿using Konsolenanwendung.Data;
+
+using System;
 using System.Collections.Generic;
 
 namespace Konsolenanwendung
 {
     class Program
     {
+        
+        private static IRepository Repository = new InMemoryRepository();
+
         private static int carIndex = 1;
         private static int customerIndex = 1;
         private static int bookingIndex = 1;
         private static string exitString = "7";
-        private static List<Car> cars = new List<Car>();
-        private static List<Customer> customers = new List<Customer>();
-        private static List<Booking> bookings = new List<Booking>();
+        
+        
+
         static void Main(string[] args)
         {
+
             string input;
             do
             {
@@ -32,7 +38,8 @@ namespace Konsolenanwendung
                 {
                     Car car = CreateCar();
                     Console.WriteLine(car);
-                    cars.Add(car);
+                    Repository.AddCar(car);
+                    
                 }
                 else if (input == "2")
                 {
@@ -42,7 +49,7 @@ namespace Konsolenanwendung
                 {
                     Customer customer = CreateCustomer();
                     Console.WriteLine(customer);
-                    customers.Add(customer);
+                    Repository.AddCustomer(customer);
                 }
                 else if (input == "4")
                 {
@@ -52,11 +59,11 @@ namespace Konsolenanwendung
                 {
                     Booking booking = CreateBooking();
                     Console.WriteLine(booking);
-                    bookings.Add(booking);
+                    Repository.AddBooking(booking);
                 }
                 else if (input == "6")
                 {
-                    foreach (var booking in bookings)
+                    foreach (var booking in Repository.GetAllBookings())
                     {
                         Console.WriteLine(booking);
                     }
@@ -74,7 +81,7 @@ namespace Konsolenanwendung
 
         private static void PrintCustomers()
         {
-            foreach (var customer in customers)
+            foreach (Customer customer in Repository.GetAllCustomer())
             {
                 Console.WriteLine(customer);
             }
@@ -82,7 +89,7 @@ namespace Konsolenanwendung
 
         private static void PrintCars()
         {
-            foreach (var car in cars)
+            foreach (var car in Repository.GetAllCars())
             {
                 Console.WriteLine(car);
             }
@@ -97,11 +104,11 @@ namespace Konsolenanwendung
             Console.WriteLine("Bitte Auto auswählen...");
             PrintCars();
             int index = int.Parse(Console.ReadLine());
-            booking.Car = cars[index -1];
+            booking.Car = Repository.GetCars(index);
             Console.WriteLine("Bitte Kunde auswählen...");
             PrintCustomers();
             index = int.Parse(Console.ReadLine());
-            booking.Customer = customers[index -1];
+            booking.Customer = Repository.GetCustomer(index);
 
             Console.WriteLine("In wievielen Tagen möchten sie das Auto ausleihen?");
             var days = int.Parse(Console.ReadLine());
