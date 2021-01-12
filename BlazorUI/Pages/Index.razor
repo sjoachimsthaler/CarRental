@@ -1,0 +1,60 @@
+﻿@page "/"
+
+<h1>Autovermietung</h1>
+
+<div>
+    <h3>Autos</h3>
+    <ul>
+        @if (Cars != null)
+        {
+            foreach (var cars in Cars)
+            {
+                <li>@cars</li>
+            }
+        }
+    </ul>
+</div>
+<div>
+    <h3>Kunden</h3>
+    @if (Customers != null)
+    {
+        <ul>
+            @foreach (var customer in Customers)
+	        {
+		            <li>@customer</li>
+	        }
+        </ul>
+    }
+</div>
+<div>
+    <h3>Buchungen</h3>
+    @if (Bookings != null)
+    {
+        <ul>
+            @foreach (var booking in Bookings)
+	        {
+		            <li>@booking</li>
+	        }
+        </ul>
+    }
+</div>
+
+
+@code
+{
+    [Inject]
+    public IRepository Repository { get; set; }
+
+    public IEnumerable<Car> Cars { get; set; }
+    public IEnumerable<Customer> Customers { get; set; }
+    public IEnumerable<Booking> Bookings { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Cars = Repository.GetAllCars();
+        Customers = Repository.GetAllCustomers();
+        Bookings = Repository.GetAllBookings();
+
+        base.OnInitialized();
+    }
+}

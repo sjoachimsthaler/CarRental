@@ -1,7 +1,8 @@
-﻿using Konsolenanwendung.Data;
+﻿
+using BusinessLogic.Data;
+using BusinessLogic.Model;
 
 using System;
-using System.Collections.Generic;
 
 namespace Konsolenanwendung
 {
@@ -9,13 +10,7 @@ namespace Konsolenanwendung
     {
         
         private static IRepository Repository = new InMemoryRepository();
-
-        private static int carIndex = 1;
-        private static int customerIndex = 1;
-        private static int bookingIndex = 1;
         private static string exitString = "7";
-        
-        
 
         static void Main(string[] args)
         {
@@ -37,8 +32,8 @@ namespace Konsolenanwendung
                 if (input == "1")
                 {
                     Car car = CreateCar();
-                    Console.WriteLine(car);
                     Repository.AddCar(car);
+                    Console.WriteLine(car);
                     
                 }
                 else if (input == "2")
@@ -81,7 +76,7 @@ namespace Konsolenanwendung
 
         private static void PrintCustomers()
         {
-            foreach (Customer customer in Repository.GetAllCustomer())
+            foreach (Customer customer in Repository.GetAllCustomers())
             {
                 Console.WriteLine(customer);
             }
@@ -97,10 +92,7 @@ namespace Konsolenanwendung
 
         private static Booking CreateBooking()
         {
-            Booking booking = new Booking
-            {
-                ID = bookingIndex
-            };
+            Booking booking = new Booking();
             Console.WriteLine("Bitte Auto auswählen...");
             PrintCars();
             int index = int.Parse(Console.ReadLine());
@@ -123,11 +115,7 @@ namespace Konsolenanwendung
 
         private static Customer CreateCustomer()
         {
-            Customer customer = new Customer
-            {
-                ID = customerIndex++
-            };
-
+            Customer customer = new Customer();
             Console.WriteLine("Bitte Vorname angeben...");
             customer.FirstName = Console.ReadLine();
             Console.WriteLine("Bitte Nachname angeben...");
@@ -138,7 +126,6 @@ namespace Konsolenanwendung
         private static Car CreateCar()
         {
             Car car = new Car();
-            car.ID = carIndex++;
 
             Console.WriteLine("Bitte Hersteller angeben...");
             car.Manufacturer = Console.ReadLine();

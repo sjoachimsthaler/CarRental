@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿
+using BusinessLogic.Model;
 
-namespace Konsolenanwendung.Data
+using System.Collections.Generic;
+
+namespace BusinessLogic.Data
 {
-    internal interface IRepository
+    public interface IRepository
     {
         void AddCar(Car car);
         IEnumerable<Car> GetAllCars();
         Car GetCars(int index);
         void AddCustomer(Customer customer);
-        IEnumerable<Customer> GetAllCustomer();
+        IEnumerable<Customer> GetAllCustomers();
         Customer GetCustomer(int index);
         void AddBooking(Booking booking);
         IEnumerable<Booking> GetAllBookings();
