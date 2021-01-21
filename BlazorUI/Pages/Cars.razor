@@ -1,0 +1,109 @@
+﻿@page "/cars"
+
+<h1>Cars</h1>
+
+<button @onclick="AddCar">Add car</button>
+@if (CarToCreate != null)
+{
+    <EditForm Model="@CarToCreate" OnValidSubmit="HandleValidCreate">
+        <label>Manufacturer</label>
+        <InputText id="manufacturer" @bind-Value="CarToCreate.Manufacturer" />
+
+        <label>Model</label>
+        <InputText id="model" @bind-Value="CarToCreate.Model" />
+
+
+        <button type="submit">Submit</button>
+
+    </EditForm>
+}
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Manufacturer</td>
+            <td>Model</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in CarsCollection)
+        {
+            <tr>
+                <td>@car.ID</td>
+                <td>@car.Manufacturer</td>
+                <td>@car.Model</td>
+                <td>
+                    <button @onclick="() => Edit(car.ID)">Edit</button>
+                    <button @onclick="() => Delete(car.ID)">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@if (CarToEdit != null)
+{
+    <EditForm Model="@CarToEdit" OnValidSubmit="HandleValidEdit">
+        <label>Manufacturer</label>
+        <InputText id="manufacturer" @bind-Value="CarToEdit.Manufacturer" />
+
+        <label>Model</label>
+        <InputText id="model" @bind-Value="CarToEdit.Model" />
+
+
+        <button type="submit">Submit</button>
+
+    </EditForm>
+}
+
+
+@code {
+
+    [Inject]
+    public IRepository Repository { get; set; }
+
+    public IEnumerable<Car> CarsCollection { get; set; }
+
+    public Car CarToEdit { get; set; }
+    public Car CarToCreate { get; set; }
+
+    protected override void OnInitialized()
+    {
+        CarsCollection = Repository.GetAllCars();
+
+        base.OnInitialized();
+    }
+
+    public void Edit(int id)
+    {
+        CarToEdit = CarsCollection.Single(c => c.ID == id);
+    }
+
+    public void Delete(int id)
+    {
+        // Delete Car in repository
+        Repository.DeleteCar(id);
+    }
+
+    private void HandleValidEdit()
+    {
+        // Edit Car in repository
+        Repository.EditCar(CarToEdit);
+        CarToEdit = null;
+    }
+
+    private void AddCar()
+    {
+        CarToCreate = new Car();
+    }
+
+    private void HandleValidCreate()
+    {
+        // Edit Car in repository
+        Repository.AddCar(CarToCreate);
+        CarToCreate = null;
+    }
+}

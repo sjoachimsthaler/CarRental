@@ -15,5 +15,8 @@ namespace BusinessLogic.Data
         Customer GetCustomer(int index);
         void AddBooking(Booking booking);
         IEnumerable<Booking> GetAllBookings();
+
+        void EditCar(Car car);
+        void DeleteCar(int id);
     }
 }

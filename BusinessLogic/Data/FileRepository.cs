@@ -93,5 +93,20 @@ namespace BusinessLogic.Data
             var bookingsJson = JsonSerializer.Serialize(bookings);
             File.WriteAllText(BookingsJsonPath, bookingsJson);
         }
+
+        public void EditCar(Car car)
+        {
+            var carToEdit = cars.Single(c => c.ID == car.ID);
+            carToEdit.Manufacturer = car.Manufacturer;
+            carToEdit.Model = car.Model;
+            SaveData();
+        }
+
+        public void DeleteCar(int id)
+        {
+            var carToDelete = cars.Single(c => c.ID == id);
+            cars.Remove(carToDelete);
+            SaveData();
+        }
     }
 }

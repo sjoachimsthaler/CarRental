@@ -2,6 +2,7 @@
 using BusinessLogic.Model;
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic.Data
 {
@@ -56,6 +57,19 @@ namespace BusinessLogic.Data
         public IEnumerable<Booking> GetAllBookings()
         {
             return bookings;
+        }
+
+        public void EditCar(Car car)
+        {
+            var carToEdit = cars.Single(c => c.ID == car.ID);
+            carToEdit.Manufacturer = car.Manufacturer;
+            carToEdit.Model = car.Model;
+        }
+
+        public void DeleteCar(int id)
+        {
+            var carToDelete = cars.Single(c => c.ID == id);
+            cars.Remove(carToDelete);
         }
     }
 }
