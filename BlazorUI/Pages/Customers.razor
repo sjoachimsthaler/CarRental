@@ -4,9 +4,9 @@
 @page "/customers"
 
 
-<h1>Cars</h1>
+<h1>Customers</h1>
 
-<button @onclick="AddCustomer">Add customer</button>
+<button type="button" class="btn btn-success" @onclick="AddCustomer">Add customer</button>
 @if (CustomerToCreate != null)
 {
     <EditForm Model="@CustomerToCreate" OnValidSubmit="HandleValidCreate">
@@ -22,7 +22,7 @@
     </EditForm>
 }
 
-<table>
+<table  class="table table-striped">
     <thead>
         <tr>
             <td>ID</td>
@@ -39,8 +39,8 @@
                 <td>@car.FirstName</td>
                 <td>@car.LastName</td>
                 <td>
-                    <button @onclick="() => Edit(car.ID)">Edit</button>
-                    <button @onclick="() => Delete(car.ID)">Delete</button>
+                    <button type="button" class="btn btn-warning" @onclick="() => Edit(car.ID)">Edit</button>
+                    <button type="button" class="btn btn-danger" @onclick="() => Delete(car.ID)">Delete</button>
                 </td>
             </tr>
         }

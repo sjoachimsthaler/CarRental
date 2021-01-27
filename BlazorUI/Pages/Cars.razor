@@ -8,20 +8,24 @@
 @if (CarToCreate != null)
 {
     <EditForm Model="@CarToCreate" OnValidSubmit="HandleValidCreate">
-        <label>Manufacturer</label>
-        <InputText id="manufacturer" @bind-Value="CarToCreate.Manufacturer" />
+        <div class="form-group">
+              <label for="manufacturer">Manufacturer</label>
+            <InputText class="form-control" id="manufacturer" @bind-Value="CarToCreate.Manufacturer" />
+        </div>
 
-        <label>Model</label>
-        <InputText id="model" @bind-Value="CarToCreate.Model" />
+        <div class="form-group">
+            <label for="model">Model</label>
+            <InputText class="form-control" id="model" @bind-Value="CarToCreate.Model" />
+        </div>
 
 
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
 
     </EditForm>
 }
 
-<table>
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
             <td>ID</td>
             <td>Manufacturer</td>
@@ -37,8 +41,8 @@
                 <td>@car.Manufacturer</td>
                 <td>@car.Model</td>
                 <td>
-                    <button @onclick="() => Edit(car.ID)">Edit</button>
-                    <button @onclick="() => Delete(car.ID)">Delete</button>
+                    <button type="button" class="btn btn-warning" @onclick="() => Edit(car.ID)">Edit</button>
+                    <button type="button" class="btn btn-danger" @onclick="() => Delete(car.ID)">Delete</button>
                 </td>
             </tr>
         }
@@ -49,14 +53,17 @@
 @if (CarToEdit != null)
 {
     <EditForm Model="@CarToEdit" OnValidSubmit="HandleValidEdit">
-        <label>Manufacturer</label>
-        <InputText id="manufacturer" @bind-Value="CarToEdit.Manufacturer" />
+        <div class="form-group">
+            <label for="manufacturer">Manufacturer</label>
+            <InputText class="form-control" id="manufacturer" @bind-Value="CarToEdit.Manufacturer" />
+        </div>
+        <div class="form-group">
+            <label for="model">Model</label>
+            <InputText class="form-control" id="model" @bind-Value="CarToEdit.Model" />
+        </div>
 
-        <label>Model</label>
-        <InputText id="model" @bind-Value="CarToEdit.Model" />
 
-
-        <button type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
 
     </EditForm>
 }

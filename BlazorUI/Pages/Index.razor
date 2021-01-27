@@ -4,38 +4,43 @@
 
 <div>
     <h3>Autos</h3>
-    <ul>
-        @if (Cars != null)
+    
+        
+    
+    @if (Cars != null)
+    {
+        <div class="list-group">
+        @foreach (var car in Cars)
         {
-            foreach (var cars in Cars)
-            {
-                <li>@cars</li>
-            }
+            <a href="/cars/@car.ID" class="list-group-item list-group-item-action">@car</a>
         }
-    </ul>
+        </div>
+    }
+    
 </div>
 <div>
     <h3>Kunden</h3>
     @if (Customers != null)
     {
-        <ul>
-            @foreach (var customer in Customers)
-	        {
-		            <li>@customer</li>
-	        }
-        </ul>
+        <div class="list-group">
+        @foreach (var customer in Customers)
+        {
+            <a href="/customers/@customer.ID" class="list-group-item list-group-item-action">@customer</a>
+        }
+        </div>
+
     }
 </div>
 <div>
     <h3>Buchungen</h3>
     @if (Bookings != null)
     {
-        <ul>
-            @foreach (var booking in Bookings)
-	        {
-		            <li>@booking</li>
-	        }
-        </ul>
+        <div class="list-group">
+        @foreach (var booking in Bookings)
+        {
+            <a href="/bookings/@booking.ID" class="list-group-item list-group-item-action">@booking</a>
+        }
+        </div>
     }
 </div>
 
