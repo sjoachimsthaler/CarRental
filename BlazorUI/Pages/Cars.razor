@@ -1,4 +1,6 @@
-﻿@page "/cars"
+﻿@inherits CarsBase
+
+@page "/cars"
 
 <h1>Cars</h1>
 
@@ -57,53 +59,4 @@
         <button type="submit">Submit</button>
 
     </EditForm>
-}
-
-
-@code {
-
-    [Inject]
-    public IRepository Repository { get; set; }
-
-    public IEnumerable<Car> CarsCollection { get; set; }
-
-    public Car CarToEdit { get; set; }
-    public Car CarToCreate { get; set; }
-
-    protected override void OnInitialized()
-    {
-        CarsCollection = Repository.GetAllCars();
-
-        base.OnInitialized();
-    }
-
-    public void Edit(int id)
-    {
-        CarToEdit = CarsCollection.Single(c => c.ID == id);
-    }
-
-    public void Delete(int id)
-    {
-        // Delete Car in repository
-        Repository.DeleteCar(id);
-    }
-
-    private void HandleValidEdit()
-    {
-        // Edit Car in repository
-        Repository.EditCar(CarToEdit);
-        CarToEdit = null;
-    }
-
-    private void AddCar()
-    {
-        CarToCreate = new Car();
-    }
-
-    private void HandleValidCreate()
-    {
-        // Edit Car in repository
-        Repository.AddCar(CarToCreate);
-        CarToCreate = null;
-    }
 }

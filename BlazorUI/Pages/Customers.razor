@@ -1,0 +1,64 @@
+﻿@inherits CustomersBase
+
+
+@page "/customers"
+
+
+<h1>Cars</h1>
+
+<button @onclick="AddCustomer">Add customer</button>
+@if (CustomerToCreate != null)
+{
+    <EditForm Model="@CustomerToCreate" OnValidSubmit="HandleValidCreate">
+        <label>FirstName</label>
+        <InputText id="firstName" @bind-Value="CustomerToCreate.FirstName" />
+
+        <label>LastName</label>
+        <InputText id="lastName" @bind-Value="CustomerToCreate.LastName" />
+
+
+        <button type="submit">Submit</button>
+
+    </EditForm>
+}
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Manufacturer</td>
+            <td>Model</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in CustomerCollection)
+        {
+            <tr>
+                <td>@car.ID</td>
+                <td>@car.FirstName</td>
+                <td>@car.LastName</td>
+                <td>
+                    <button @onclick="() => Edit(car.ID)">Edit</button>
+                    <button @onclick="() => Delete(car.ID)">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@if (CustomerToEdit != null)
+{
+    <EditForm Model="@CustomerToEdit" OnValidSubmit="HandleValidEdit">
+        <label for="firstName">FirstName</label>
+        <InputText id="firstName" @bind-Value="CustomerToEdit.FirstName" />
+
+        <label for="lastName">LastName</label>
+        <InputText id="lastName" @bind-Value="CustomerToEdit.LastName" />
+
+
+        <button type="submit">Submit</button>
+
+    </EditForm>
+}

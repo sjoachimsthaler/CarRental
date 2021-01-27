@@ -18,5 +18,9 @@ namespace BusinessLogic.Data
 
         void EditCar(Car car);
         void DeleteCar(int id);
+        void EditCustomer(Customer customer);
+        void DeleteCustomer(int id);
+        void DeleteBooking(int id);
+        void EditBooking(Booking bookingToEdit);
     }
 }

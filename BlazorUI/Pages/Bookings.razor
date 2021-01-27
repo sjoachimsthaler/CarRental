@@ -1,0 +1,64 @@
+﻿@inherits BookingsBase
+
+
+@page "/bookings"
+
+
+<h1>Cars</h1>
+
+<button @onclick="AddBooking">Add booking</button>
+@if (BookingToCreate != null)
+{
+    <EditForm Model="@BookingToCreate" OnValidSubmit="HandleValidCreate">
+        @*<label>FirstName</label>
+        <InputText id="firstName" @bind-Value="BookingToCreate.FirstName" />
+
+        <label>LastName</label>
+        <InputText id="lastName" @bind-Value="BookingToCreate.LastName" />*@
+
+
+        <button type="submit">Submit</button>
+
+    </EditForm>
+}
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Manufacturer</td>
+            <td>Model</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in BookingsCollection)
+        {
+          @*  <tr>
+                <td>@car.ID</td>
+                <td>@car.FirstName</td>
+                <td>@car.LastName</td>
+                <td>
+                    <button @onclick="() => Edit(car.ID)">Edit</button>
+                    <button @onclick="() => Delete(car.ID)">Delete</button>
+                </td>
+            </tr>*@
+        }
+
+    </tbody>
+</table>
+
+@if (BookingToEdit != null)
+{
+    <EditForm Model="@BookingToEdit" OnValidSubmit="HandleValidEdit">
+        @*<label for="firstName">FirstName</label>
+        <InputText id="firstName" @bind-Value="BookingToEdit.FirstName" />
+
+        <label for="lastName">LastName</label>
+        <InputText id="lastName" @bind-Value="BookingToEdit.LastName" />
+
+
+        <button type="submit">Submit</button>*@
+
+    </EditForm>
+}

@@ -71,5 +71,28 @@ namespace BusinessLogic.Data
             var carToDelete = cars.Single(c => c.ID == id);
             cars.Remove(carToDelete);
         }
+
+        public void EditCustomer(Customer customer)
+        {
+            var customerToEdit = customers.Single(c => c.ID == customer.ID);
+            customerToEdit.FirstName = customer.FirstName;
+            customerToEdit.LastName = customer.LastName;
+        }
+
+        public void DeleteCustomer(int id)
+        {
+            var customerToDelete = customers.Single(c => c.ID == id);
+            customers.Remove(customerToDelete);
+        }
+
+        public void DeleteBooking(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void EditBooking(Booking bookingToEdit)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
