@@ -50,7 +50,7 @@ namespace BusinessLogic.Data
 
         public Car GetCars(int index)
         {
-            return cars[index - 1];
+            return cars.SingleOrDefault(c => c.ID == index);
         }
 
         public void AddCustomer(Customer customer)
@@ -67,7 +67,7 @@ namespace BusinessLogic.Data
 
         public Customer GetCustomer(int index)
         {
-            return customers[index - 1];
+            return customers.SingleOrDefault(c => c.ID == index);
         }
 
         public void AddBooking(Booking booking)

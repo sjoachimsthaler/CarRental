@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using BusinessLogic.Data;
@@ -17,6 +18,11 @@ namespace BlazorUI.Pages
 
         public Booking BookingToEdit { get; set; }
         public Booking BookingToCreate { get; set; }
+        protected bool ShowBookingCreate { get => BookingToCreate != null; }
+
+        protected int selectedCarId { get; set; }
+        protected int selectedCustomerId { get; set; }
+
 
         protected override void OnInitialized()
         {
@@ -45,12 +51,18 @@ namespace BlazorUI.Pages
 
         protected void AddBooking()
         {
-            BookingToCreate = new Booking();
+            BookingToCreate = new Booking()
+            {
+                From = DateTime.Now,
+                To = DateTime.Now.AddDays(3)
+            };
         }
 
         protected void HandleValidCreate()
         {
             // Edit Car in repository
+            BookingToCreate.Customer = Repository.GetCustomer(selectedCustomerId);
+            BookingToCreate.Car = Repository.GetCars(selectedCarId);
             Repository.AddBooking(BookingToCreate);
             BookingToCreate = null;
         }
