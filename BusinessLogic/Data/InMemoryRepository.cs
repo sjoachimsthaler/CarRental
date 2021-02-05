@@ -27,9 +27,9 @@ namespace BusinessLogic.Data
             return cars;
         }
 
-        public Car GetCars(int index)
+        public Car GetCar(int id)
         {
-            return cars[index - 1];
+            return cars.SingleOrDefault(c => c.ID == id);
         }
 
         public void AddCustomer(Customer customer)
@@ -43,9 +43,9 @@ namespace BusinessLogic.Data
             return customers;
         }
 
-        public Customer GetCustomer(int index)
+        public Customer GetCustomer(int id)
         {
-            return customers[index - 1];
+            return customers.SingleOrDefault(c => c.ID == id);
         }
 
         public void AddBooking(Booking booking)
@@ -96,6 +96,11 @@ namespace BusinessLogic.Data
         {
             var existingBooking = bookings.Single(b => b.ID == bookingToEdit.ID);
             existingBooking = bookingToEdit;
+        }
+
+        public Booking GetBooking(int id)
+        {
+            return bookings.SingleOrDefault(c => c.ID == id);
         }
     }
 }

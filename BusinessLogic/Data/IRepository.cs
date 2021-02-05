@@ -9,10 +9,10 @@ namespace BusinessLogic.Data
     {
         void AddCar(Car car);
         IEnumerable<Car> GetAllCars();
-        Car GetCars(int index);
+        Car GetCar(int id);
         void AddCustomer(Customer customer);
         IEnumerable<Customer> GetAllCustomers();
-        Customer GetCustomer(int index);
+        Customer GetCustomer(int id);
         void AddBooking(Booking booking);
         IEnumerable<Booking> GetAllBookings();
 
@@ -22,5 +22,6 @@ namespace BusinessLogic.Data
         void DeleteCustomer(int id);
         void DeleteBooking(int id);
         void EditBooking(Booking bookingToEdit);
+        Booking GetBooking(int id);
     }
 }

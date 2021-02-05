@@ -53,7 +53,7 @@ namespace BlazorUI.Pages
         protected void HandleValidEdit()
         {
             BookingToEdit.Customer = Repository.GetCustomer(selectedCustomerId);
-            BookingToEdit.Car = Repository.GetCars(selectedCarId);
+            BookingToEdit.Car = Repository.GetCar(selectedCarId);
             // Edit Car in repository
             Repository.EditBooking(BookingToEdit);
             BookingToEdit = null;
@@ -72,7 +72,7 @@ namespace BlazorUI.Pages
         {
             // Edit Car in repository
             BookingToCreate.Customer = Repository.GetCustomer(selectedCustomerId);
-            BookingToCreate.Car = Repository.GetCars(selectedCarId);
+            BookingToCreate.Car = Repository.GetCar(selectedCarId);
             Repository.AddBooking(BookingToCreate);
             BookingToCreate = null;
         }

@@ -96,7 +96,7 @@ namespace Konsolenanwendung
             Console.WriteLine("Bitte Auto auswählen...");
             PrintCars();
             int index = int.Parse(Console.ReadLine());
-            booking.Car = Repository.GetCars(index);
+            booking.Car = Repository.GetCar(index);
             Console.WriteLine("Bitte Kunde auswählen...");
             PrintCustomers();
             index = int.Parse(Console.ReadLine());
