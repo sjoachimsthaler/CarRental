@@ -87,12 +87,15 @@ namespace BusinessLogic.Data
 
         public void DeleteBooking(int id)
         {
-            throw new System.NotImplementedException();
+            var bookingToDelete = bookings.Single(b => b.ID == id);
+
+            bookings.Remove(bookingToDelete);
         }
 
         public void EditBooking(Booking bookingToEdit)
         {
-            throw new System.NotImplementedException();
+            var existingBooking = bookings.Single(b => b.ID == bookingToEdit.ID);
+            existingBooking = bookingToEdit;
         }
     }
 }

@@ -4,7 +4,7 @@
 
 <h1>Cars</h1>
 
-<button @onclick="AddCar">Add car</button>
+<button @onclick="AddCar" class="btn btn-success">Add car</button>
 @if (CarToCreate != null)
 {
     <EditForm Model="@CarToCreate" OnValidSubmit="HandleValidCreate">

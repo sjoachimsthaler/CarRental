@@ -6,7 +6,7 @@
 
 <h1>Cars</h1>
 
-<button @onclick="AddBooking">Add booking</button>
+<button @onclick="AddBooking" class="btn btn-success">Add booking</button>
 @if (ShowBookingCreate)
 {
     <EditForm Model="@BookingToCreate" OnValidSubmit="HandleValidCreate">
@@ -39,13 +39,13 @@
         </div>
 
 
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
 
     </EditForm>
 }
 
 <table class="table table-striped">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Customer</th>
@@ -65,8 +65,8 @@
                 <td>@booking.From</td>
                 <td>@booking.To</td>
                 <td>
-                    <button @onclick="() => Edit(booking.ID)">Edit</button>
-                    <button @onclick="() => Delete(booking.ID)">Delete</button>
+                    <button type="button" class="btn btn-warning" @onclick="() => Edit(booking.ID)">Edit</button>
+                    <button type="button" class="btn btn-danger" @onclick="() => Delete(booking.ID)">Delete</button>
                 </td>
             </tr>
         }
@@ -74,17 +74,53 @@
     </tbody>
 </table>
 
-@if (BookingToEdit != null)
+@if (ShowBookingEdit)
 {
     <EditForm Model="@BookingToEdit" OnValidSubmit="HandleValidEdit">
-        @*<label for="firstName">FirstName</label>
-        <InputText id="firstName" @bind-Value="BookingToEdit.FirstName" />
+        <div class="form-group">
+              <label for="customer">Customer</label>
+            <InputSelect class="form-control" id="customer" @bind-Value="selectedCustomerId" itemid="ID" itemref="drpCustomer">
+                @foreach (var customer in AllCustomers)
+                {
+                    if (customer.ID == selectedCustomerId)
+                    {
+                        <option value="@customer.ID"  selected>@customer</option>
+                    }
+                    else
+                    {
+                        <option value="@customer.ID">@customer</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+        <div class="form-group">
+              <label for="car">Car</label>
+            <InputSelect class="form-control" id="car" @bind-Value="selectedCarId" >
+                @foreach (var car in AllCars)
+                {
+                    if (car.ID ==selectedCarId)
+                    {
+                        <option value="@car.ID" selected>@car</option>
+                    }
+                    else
+                    {
+                        <option value="@car.ID">@car</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+        <div class="form-group">
+              <label for="from">From</label>
+            <InputDate class="form-control" id="from" @bind-Value="BookingToEdit.From" />
+        </div>
 
-        <label for="lastName">LastName</label>
-        <InputText id="lastName" @bind-Value="BookingToEdit.LastName" />
+        <div class="form-group">
+            <label for="to">To</label>
+            <InputDate class="form-control" id="to" @bind-Value="BookingToEdit.To"></InputDate>
+        </div>
 
 
-        <button type="submit">Submit</button>*@
+        <button type="submit" class="btn btn-primary">Submit</button>
 
     </EditForm>
 }

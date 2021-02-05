@@ -15,10 +15,13 @@ namespace BlazorUI.Pages
         public IRepository Repository { get; set; }
 
         public IEnumerable<Booking> BookingsCollection { get; set; }
+        public IEnumerable<Car> AllCars { get; set; }
+        public IEnumerable<Customer> AllCustomers { get; set; }
 
         public Booking BookingToEdit { get; set; }
         public Booking BookingToCreate { get; set; }
         protected bool ShowBookingCreate { get => BookingToCreate != null; }
+        protected bool ShowBookingEdit { get => BookingToEdit != null; }
 
         protected int selectedCarId { get; set; }
         protected int selectedCustomerId { get; set; }
@@ -33,7 +36,12 @@ namespace BlazorUI.Pages
 
         protected void Edit(int id)
         {
-            BookingToEdit = BookingsCollection.Single(c => c.ID == id);
+            AllCars = Repository.GetAllCars();
+            AllCustomers = Repository.GetAllCustomers();
+            var selectedBookingForEdit = BookingsCollection.Single(c => c.ID == id);
+            selectedCarId = selectedBookingForEdit.Car.ID;
+            selectedCustomerId = selectedBookingForEdit.Customer.ID;
+            BookingToEdit = selectedBookingForEdit;
         }
 
         protected void Delete(int id)
@@ -44,6 +52,8 @@ namespace BlazorUI.Pages
 
         protected void HandleValidEdit()
         {
+            BookingToEdit.Customer = Repository.GetCustomer(selectedCustomerId);
+            BookingToEdit.Car = Repository.GetCars(selectedCarId);
             // Edit Car in repository
             Repository.EditBooking(BookingToEdit);
             BookingToEdit = null;
