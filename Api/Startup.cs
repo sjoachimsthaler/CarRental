@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +30,11 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IRepository>(new InMemoryRepository());
+
+            services.AddDbContext<CarRentalContext>(options
+                => options.UseSqlite("name = ConnectionStrings:DefaultConnection"));
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddSingleton<IRepository>(new SqliteRepository());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
